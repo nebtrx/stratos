@@ -1,0 +1,6 @@
+Stratos Framework is a framework for executes webbots. It's a way for write faster and easyly webbots inside a context which provide the common webbots operations.
+This is the first stable version. In short future I will upload a set of webbot samples running over the framewrok. The framework was develop as an aid during the
+ construcction of webbot for comercial purposes in cuba which has not released yet. For this reason the first commit has not a context to be tested, but for  those
+ with souls of entrepeneurs I'll give you a hint: Extend the lib/scraper/Webbot.class.php in the bot directory and check the script/launcher.php.
+
+

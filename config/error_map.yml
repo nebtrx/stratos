@@ -1,0 +1,32 @@
+## YAML Template.
+##---
+error:
+  ##      Internal functions(DO NOT DELETE THIS)  
+  101:    "Error accessing app config: Missing configuration value in settings file."
+  102:    "Error accessing app config: Unexpected configuration value in settings file."
+  103:    "Error modiying app config: Read only configuration value."
+  104:    "Error executing context: Webbot object injection required!."
+  105:    "Error initializing context startup: Parameter <%parameter%> expected while loading startup <%startup%>." 
+  106:    "Error initializing default logging config: Parameter <%parameter%> expected."
+  107:    "Error openning stream: No such file or directory <%file%>."  
+  108:    "Error parsing information: Unexpected <%field%> value found while parsing page: '%url%'."
+  109:    "Error executing webbot: Invalid stop condition evaluation function provided."
+  110:    "Error executing webbot: Unassigned stop condition evaluation function."
+  111:    "Error executing webbot: Invalid stop condition evaluation function assigned."
+  112:    "Error downloading page: Request to '%url%' returned '%http_code%' status code. [Wrapped CURL Error: %curl_error_info%.]."
+  113:    "Error initializing context startup: Startup <%startup%> is not a valid 'IStartup' object."
+    
+  ##      User Defined
+  201:    "User defined exception."
+  
+  ##      Persistence
+  301:    "Persistence exception"
+  
+  ##      Seguridad
+  401:    "Security Exception"
+  
+  ##      Unidentified errors!
+  501:    "Fatal Error"
+  
+  ##      Not implemented
+  999:    "Error: Not implemented feature or code block."

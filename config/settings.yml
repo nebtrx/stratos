@@ -1,0 +1,108 @@
+## YAML Template.
+---
+
+general:
+  persistence:
+    use_database:               true
+    connections:
+      development:              mysql://root:intart@localhost/gossip
+    models_dir:                 model
+  startups:
+    webbot_logger:
+      enabled:                  true
+      class:                    WebbotLogger
+      options:                   ~
+    http_scraper_logger:
+      enabled:                  true
+      class:                    HttpScraperLogger
+      options:
+        format: |
+          [%time%] {%webbot_finger_print%} [%http_code%] agent:    %agent%
+          [%time%] {%webbot_finger_print%} [%http_code%] method:   %method%
+          [%time%] {%webbot_finger_print%} [%http_code%] url:      "%url%"          
+          [%time%] {%webbot_finger_print%} [%http_code%] referer:  %referer%%EOL%
+        file_name:              http_scrapper.log
+    exception_logger:
+      enabled:                  true
+      class:                    ExceptionLogger
+      options:
+        format: |         
+          [%time%] {%webbot_finger_print%}[Exception]    type:     %type%
+          [%time%] {%webbot_finger_print%}[Exception]    message:  %message%
+          [%time%] {%webbot_finger_print%}[Exception]    file:     %file%
+          [%time%] {%webbot_finger_print%}[Exception]    line:     %line%
+        inner_format: |   
+          [%time%] {%webbot_finger_print%}[Exception]    inner_exception:
+          [%time%] {%webbot_finger_print%}[Exception]        type:     %inner_type%
+          [%time%] {%webbot_finger_print%}[Exception]        message:  %inner_message%
+          [%time%] {%webbot_finger_print%}[Exception]        file:     %inner_file%
+          [%time%] {%webbot_finger_print%}[Exception]        line:     %inner_line%
+        file_name:              exception.log
+        # File name for logging unhandled exception
+        u_file_name:            unhandled_exception.log
+  logging:
+    time_format:                %b %d %H:%M:%S 
+    default_format:             '[%time%] {%sender%} %message%%EOL%'
+  error_handling:
+    exception_logging:          true
+    error_map_file:             config/error_map.yml    
+
+http_scrap:
+  curl_timeout:                 30
+  cookie_file:                  /var/www/webbots/cookie.txt
+  
+  # Enables the agent swapping technique to keep a under the hood the behavior of 
+  # the scrapping process
+  agent_swapping:     true
+  
+  # If "agent_swapping" is active you may use it for swapping the User-Agent used to
+  # scraps in order to keep an active stealth scrapping processs throw the  
+  # configuration option "next-agent". If "agent sconfigwaapping" is false the first 
+  # agent is set to default
+  agents:             
+    - Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+    - Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)
+    - Midori/0.1.8 (X11; Linux x86_64; U; en-us) WebKit/532
+    - Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)
+    - Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3
+    - Mozilla/5.0 (Windows NT 6.1; Intel Mac OS X 10.6; rv:7.0.1) Gecko/20100101 Firefox/7.0.1
+    - Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:7.0.1) Gecko/20100101 Firefox/7.0.1
+    - Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5
+    - Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.11 (KHTML, like Gecko) Ubuntu/11.10
+    - Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1
+    - Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3
+    - Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1
+    - Mozilla/5.0 (iPad; CPU OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5
+    - Chromium/17.0.963.65 Chrome/17.0.963.65 Safari/535.11
+    - Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3
+            
+  verbose_scrapping:  false  
+  accept_redirects:   true  
+  max_redirects:      4  
+  use_proxy:          true  
+  proxy:
+    type:             HTTP
+    ip:               10.0.0.1
+    port:             8080
+    user:             oagarcia
+    passwd:           daftXtgddr3
+
+
+webbot:
+  # Enables the use of a ramdom delay time in seconds between access/scraps to 
+  # pages served in the same server while keeping the webbot's behavior under 
+  # the hood. This technique is often used in conjunction with "agent_swapping"
+  ramdon_access_time:           true
+
+  # Max delay time between access/scraps against web URL's. This is value is used 
+  # as max value to generate a ramdom delay time in seconds between access/scraps 
+  # to pages served in the same server while keeping the webbot's behavior under 
+  # the hood. 
+  max_delay_time:               5
+  
+  # If true the the base domain addres will be used as page_base for calculation of
+  # the resolved address instead of teh base page address(the defautl value)
+  base_domain_relative_links:   true
+  
+  time_limit:                   900  
+     
